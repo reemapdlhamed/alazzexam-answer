@@ -1,0 +1,64 @@
+<!-- <pre>
+    {{ result | json }}
+</pre> -->
+
+<div class="container">
+  <div class="quiz-container">
+    <div class="quiz-title-wrapper">
+      <div class="quiz-title">
+        <h2>
+          <span class="title">{{ result?.Title }}</span>
+        </h2>
+      </div>
+    </div>
+    <div class="quiz-body"></div>
+    <div
+      class="question"
+      *ngFor="let r of result?.QuestionResults; let i = index"
+    >
+      <h5>
+        <span>{{ i + 1 + "- " }}</span>
+        <span class="question-title">{{ r.Title }}</span>
+      </h5>
+      <div
+        class="mcq row"
+        *ngFor="let answer of r?.Answers"
+        [style.background-color]="
+          answer.IsCorrect === false ? 'red' : 'lightgreen'
+        "
+      >
+        <span class="answer col-10"> {{ answer.Text }}</span>
+        <!-- <span> {{ r.SelectedAnswerId }}</span>
+        <span>{{ r.CorrentAnswerId }}</span> -->
+        <!-- <span> {{ r.AnsweredCorrectly }}</span> -->
+        <span
+          class="notification col-2"
+          *ngIf="
+            r.SelectedAnswerId == r.CorrentAnswerId && answer.IsCorrect == true
+          "
+        >
+          <i class="fa-solid fa-circle-check"></i> correct answer
+        </span>
+        <span
+          class="notification col-2"
+          *ngIf="
+            r.SelectedAnswerId !== r.CorrentAnswerId &&
+            r.SelectedAnswerId == answer.Id
+          "
+        >
+          <i class="fa-solid fa-circle-xmark"></i> wrong answer
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="last-result">
+   
+    <span
+      *ngIf="
+        result?.QuestionResults?.SelectedAnswerId !==
+        result?.QuestionResults?.CorrentAnswerId
+      "
+      >Sorry you have to take the test again</span
+    >
+  </div> -->
+</div>

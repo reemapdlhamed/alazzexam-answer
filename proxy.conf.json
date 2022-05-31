@@ -1,0 +1,9 @@
+{
+    "/SolveQuiz": {
+      "target": "http://projectegy-003-site13.gtempurl.com",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel":"debug"
+    }
+  }
+  

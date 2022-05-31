@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="quiz-container">
+    <div class="quiz-title-wrapper">
+      <div class="icon">
+        <img src="assets/images/Vector.png" alt="icon" />
+      </div>
+      <div class="quiz-title">
+        <span class="number">0.1:</span>
+        <span class="title">{{ quiz?.Title }} </span>
+        <span class="time">(37 mins)</span>
+      </div>
+      <div class="quiz-time">( <span>1.5 mins</span> )</div>
+    </div>
+    <div class="quiz-body">
+      <div
+        class="toggle-questions"
+        (click)="toggle()"
+        [ngClass]="isShown ? 'togglecolor' : ''"
+      >
+        Show the questions related to this lesson
+        <i class="fa-solid fa-angle-up"></i>
+        <!-- <span class="svg" style="mask: url(assets/images/Vector.svg) no-repeat center" ></span> -->
+        <!-- <img src="assets/images/Vector.svg" alt="" /> -->
+      </div>
+      <form #f="ngForm" (ngSubmit)="submit(f.value)">
+        <div
+          class="questionswrapper"
+          [ngClass]="isShown ? 'active' : ''"
+          *ngFor="let question of quiz?.Questions; let i = index"
+        >
+          <div class="question">
+            <h4>
+              <span>{{ "0." + i }}</span>
+              <span class="question-title">
+                {{ question?.Title }}
+              </span>
+            </h4>
+            <div class="mcq" *ngFor="let answer of question.Answers">
+              <div>
+                <label for="{{ answer.Id }}">
+                  {{ answer.Text }}
+                  <input
+                    #inputfield
+                    (change)="saveAnswers(i, inputfield.value)"
+                    type="radio"
+                    id="{{ answer.Id }}"
+                    name="{{ 'ans' + question.Id }}"
+                    value="{{ answer.Id }}"
+                    class="form-control"
+                    ngModel
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="question">
+          <h4>
+            <span>0.1</span>
+            <span class="question-title">
+              What sholud I do if i do not receive a responce?
+            </span>
+          </h4>
+          <div class="mcq">
+            <div>
+              <label>
+                For any aspirants of JEE, NEET, CBSE, ICSE or other board
+                <input type="radio" name="answer-question-two" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div>
+              <label>
+                For any aspirants of JEE, NEET, CBSE, ICSE or other board
+                <input type="radio" name="answer-question-two" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div>
+              <label>
+                For any aspirants of JEE, NEET, CBSE, ICSE or other board
+                <input type="radio" name="answer-question-two" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="question">
+          <h4>
+            <span>0.1</span>
+            <span class="question-title">
+              What sholud I do if i do not receive a responce?
+            </span>
+          </h4>
+          <div class="mcq">
+            <div>
+              <label>
+                For any aspirants of JEE, NEET, CBSE, ICSE or other board
+                <input type="radio" name="answer-question-three" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div>
+              <label>
+                For any aspirants of JEE, NEET, CBSE, ICSE or other board
+                <input type="radio" name="answer-question-three" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div>
+              <label>
+                For any aspirants of JEE, NEET, CBSE, ICSE or other board
+                <input type="radio" name="answer-question-three" />
+                <span class="checkmark"></span
+              ></label>
+            </div>
+          </div> -->
+          <!-- </div> -->
+        </div>
+        <button class="button-3" role="button" type="submit">Send</button>
+        <!-- <button type="submit">SEND</button> -->
+      </form>
+
+      <!-- <pre>{{ f.value | json }}</pre> -->
+
+      <!-- <pre>
+ 
+  {{ savedAnswers }}
+</pre> -->
+    </div>
+  </div>
+</div>
